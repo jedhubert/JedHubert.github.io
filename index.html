@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jed Hubert C · Projects</title>
+
+<meta name="description" content="Jed Hubert C (jedhubert): LLM services, machine learning pipelines and full-stack apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: a model-card index. Hero = a live-looking API call; projects = spec cards with real figures from each repo. */
+:root {
+  --paper: #eef1f4;
+  --surface: #ffffff;
+  --ink: #14202b;
+  --muted: #586776;
+  --line: #d3dae1;
+  --accent: #0f6f62;
+  --accent-soft: #d6ece8;
+  --signal: #b5530c;
+  --code-bg: #14202b;
+  --code-fg: #dce5ec;
+  --code-dim: #7f93a5;
+  --code-key: #7fd1c2;
+  --code-str: #f0b47a;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f161d; --surface: #16212b; --ink: #e4ebf1; --muted: #93a3b2; --line: #2a3845;
+    --accent: #5cc4b2; --accent-soft: #173a36; --signal: #f0a060;
+    --code-bg: #0a1016; --code-fg: #dce5ec; --code-dim: #6d8193; --code-key: #7fd1c2; --code-str: #f0b47a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f161d; --surface: #16212b; --ink: #e4ebf1; --muted: #93a3b2; --line: #2a3845;
+  --accent: #5cc4b2; --accent-soft: #173a36; --signal: #f0a060;
+  --code-bg: #0a1016; --code-fg: #dce5ec; --code-dim: #6d8193; --code-key: #7fd1c2; --code-str: #f0b47a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* top bar */
+.bar { border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.handle { font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.handle b { color: var(--ink); font-weight: 500; }
+.bar nav { display: flex; gap: 20px; font-size: 14px; }
+.bar nav a { color: var(--muted); text-decoration: none; }
+.bar nav a:hover { color: var(--ink); }
+
+/* hero */
+.hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; padding-block: 64px 56px; align-items: center; }
+.hero .wrap > * { min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 16px; }
+h1 {
+  font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 4.1rem);
+  line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 20px; text-wrap: balance;
+}
+h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 1.125rem; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 8px;
+  font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--ink);
+}
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.ghost { color: var(--ink); }
+.btn:hover { transform: translateY(-1px); }
+
+.term {
+  background: var(--code-bg); color: var(--code-fg); border-radius: 12px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.7; overflow: hidden;
+  box-shadow: 0 24px 48px -24px rgba(20, 32, 43, .45);
+}
+.term-head { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid rgba(127,147,165,.25); color: var(--code-dim); font-size: 12px; }
+.term pre { margin: 0; padding: 16px; overflow-x: auto; white-space: pre; }
+.term .d { color: var(--code-dim); }
+.term .k { color: var(--code-key); }
+.term .s { color: var(--code-str); }
+.term .hit { display: block; margin-top: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .term .hit { animation: blink 1.4s ease-out 0.6s both; }
+  @keyframes blink { 0% { opacity: .35; } 100% { opacity: 1; } }
+}
+
+/* stack strip */
+.stack { border-block: 1px solid var(--line); background: var(--surface); }
+.stack .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-block: 28px; }
+.stack h3 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.stack p { margin: 0; font-size: 15px; }
+
+/* projects */
+section.projects .wrap { padding-block: 64px; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 24px; flex-wrap: wrap; margin-bottom: 28px; }
+h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 3.5vw, 2.4rem); letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters button {
+  font: 500 14px var(--body); padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: transparent; color: var(--muted);
+}
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+}
+.card.featured { grid-column: span 2; display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px 32px; }
+.card.featured .card-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.kind { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.repo { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.card h3 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+.card p { margin: 0; color: var(--muted); }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; font-size: 14px; border-top: 1px dashed var(--line); padding-top: 14px; }
+.spec dt { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.spec dd { margin: 0; font-variant-numeric: tabular-nums; }
+.spec dd strong { color: var(--signal); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.tags li { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 5px; background: var(--accent-soft); color: var(--ink); }
+.links { display: flex; gap: 18px; font-size: 14px; font-weight: 600; margin-top: auto; flex-wrap: wrap; }
+.card.featured .links { margin-top: 0; }
+
+/* footer */
+footer { border-top: 1px solid var(--line); }
+footer .wrap { padding-block: 40px 56px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: end; }
+footer h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+footer p { margin: 8px 0 0; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 36px; padding-block: 40px; }
+  .stack .wrap { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: 1fr; }
+  .card.featured { grid-column: auto; grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .stack .wrap { grid-template-columns: 1fr; }
+  .bar nav { gap: 14px; }
+}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <span class="handle">github.com/<b>jedhubert</b></span>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="https://github.com/jedhubert" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Jed Hubert C · ML &amp; AI engineering</p>
+        <h1>I build models, <em>and the systems that serve them.</em></h1>
+        <p class="lede">LLM inference services, real-time voice agents, end-to-end ML pipelines and full-stack web apps. Eight projects, from a scraped dataset to a containerized API with caching and health checks.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See the projects</a>
+          <a class="btn ghost" href="https://github.com/jedhubert" target="_blank" rel="noopener">GitHub profile</a>
+        </div>
+      </div>
+      <div class="term" aria-label="Example request to the LLM Inference API">
+        <div class="term-head"><span>llm-inference-api</span><span>POST /generate</span></div>
+<pre><span class="d">$</span> curl -X POST localhost:8000/generate \
+    -H <span class="s">"X-API-Key: $API_KEY"</span> \
+    -d <span class="s">'{"prompt": "Explain quantum computing
+         in one sentence.", "temperature": 0}'</span>
+
+<span class="d"># second identical call, served from Redis</span>
+{
+  <span class="k">"result"</span>: <span class="s">"Quantum computers use qubits…"</span>,
+  <span class="k">"token_usage"</span>: <span class="s">24</span>,
+  <span class="k">"cached"</span>: <span class="s">true</span>,<span class="hit">  <span class="k">"latency_ms"</span>: <span class="s">3.8</span></span>}</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack" id="stack" aria-label="Tech stack">
+    <div class="wrap">
+      <div><h3>AI &amp; LLMs</h3><p>Transformers, PyTorch, Groq, Gemini, Whisper, LiveKit</p></div>
+      <div><h3>Machine learning</h3><p>scikit-learn, XGBoost, LightGBM, Keras, SHAP</p></div>
+      <div><h3>Backend &amp; ops</h3><p>FastAPI, Flask, Docker Compose, Redis, MySQL, AWS EC2</p></div>
+      <div><h3>Frontend &amp; data</h3><p>React, TypeScript, Supabase, Streamlit, pandas, Plotly</p></div>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Projects</h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+          <button type="button" id="f-ai" data-f="ai" aria-pressed="false">AI &amp; LLMs</button>
+          <button type="button" id="f-ml" data-f="ml" aria-pressed="false">ML &amp; data</button>
+          <button type="button" id="f-web" data-f="web" aria-pressed="false">Web apps</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card featured" data-cat="ai">
+          <div class="card-main">
+            <div class="card-top"><span class="kind">LLM serving</span><span class="repo">LLM-Inference-API</span></div>
+            <h3>Production LLM Inference API</h3>
+            <p>A containerized inference service for TinyLlama 1.1B. FastAPI serves <code>/generate</code>, <code>/health</code> and <code>/cache</code>; Redis caches deterministic answers keyed by a SHA-256 prompt fingerprint plus the model ID, so a repeated prompt skips the model entirely. Ships with one-command deploy scripts, a cron health probe and a troubleshooting playbook.</p>
+            <ul class="tags"><li>FastAPI</li><li>Transformers</li><li>Redis</li><li>Docker Compose</li><li>Bash / PowerShell</li></ul>
+          </div>
+          <div class="card-main">
+            <dl class="spec">
+              <dt>Cache hit</dt><dd><strong>&lt; 5 ms</strong>, down from seconds per call</dd>
+              <dt>Eviction</dt><dd>TTL with <code>allkeys-lru</code></dd>
+              <dt>Auth</dt><dd>Optional <code>X-API-Key</code> header</dd>
+              <dt>Ops</dt><dd>Deploy script polls health with backoff</dd>
+            </dl>
+            <div class="links"><a href="https://github.com/jedhubert/LLM-Inference-API" target="_blank" rel="noopener">Source</a></div>
+          </div>
+        </article>
+
+        <article class="card featured" data-cat="ai">
+          <div class="card-main">
+            <div class="card-top"><span class="kind">Voice AI</span><span class="repo">E-Commerce-Voice-AI-Assistant</span></div>
+            <h3>Aria, a real-time e-commerce voicebot</h3>
+            <p>A low-latency customer-support agent you talk to in the browser. Audio streams over LiveKit WebRTC into a Python pipeline: Silero VAD, local Whisper speech-to-text, Llama 3.3 70B on Groq, then local Piper text-to-speech. Tool calls look up orders and products, and a small local RAG answers policy questions.</p>
+            <ul class="tags"><li>LiveKit</li><li>Groq · Llama 3.3</li><li>faster-whisper</li><li>Piper TTS</li><li>React 19</li></ul>
+          </div>
+          <div class="card-main">
+            <dl class="spec">
+              <dt>Pipeline</dt><dd>VAD → STT → LLM → TTS</dd>
+              <dt>Tools</dt><dd><code>get_order_status</code>, <code>get_product_info</code>, <code>search_faq</code></dd>
+              <dt>Fallback</dt><dd>Hands off unsupported requests to a human</dd>
+            </dl>
+            <div class="links"><a href="https://github.com/jedhubert/E-Commerce-Voice-AI-Assistant" target="_blank" rel="noopener">Source</a></div>
+          </div>
+        </article>
+
+        <article class="card" data-cat="ai">
+          <div class="card-top"><span class="kind">EdTech · AI</span><span class="repo">AI-Digital-Twin-</span></div>
+          <h3>AI Student Digital Twin</h3>
+          <p>A digital twin of a student's placement readiness. It scores placement probability from GPA, attendance, LeetCode count and mock-interview results, projects the trend forward, maps skill gaps on a knowledge graph, recommends companies, and runs Gemini-powered resume analysis, mock interviews and weekly roadmaps.</p>
+          <dl class="spec">
+            <dt>API</dt><dd>Student, analysis and interview routers</dd>
+            <dt>Forecast</dt><dd><strong>4-week</strong> readiness projection</dd>
+          </dl>
+          <ul class="tags"><li>FastAPI</li><li>Gemini</li><li>MongoDB</li><li>Tailwind</li><li>Docker</li></ul>
+          <div class="links"><a href="https://github.com/jedhubert/AI-Digital-Twin-" target="_blank" rel="noopener">Source</a></div>
+        </article>
+
+        <article class="card" data-cat="ml">
+          <div class="card-top"><span class="kind">Classification</span><span class="repo">Bank-Term-Deposit-Subscription-Prediction</span></div>
+          <h3>Bank Term Deposit Prediction</h3>
+          <p>An end-to-end pipeline predicting which customers will subscribe to a term deposit on an imbalanced dataset. Custom feature engineering, a scikit-learn preprocessing pipeline, a model leaderboard by ROC-AUC, SHAP explanations, and a Streamlit app for live predictions.</p>
+          <dl class="spec">
+            <dt>Models</dt><dd><strong>7</strong> compared: LR, RF, XGBoost, LightGBM, GBM, NB, Keras MLP, plus a soft-voting ensemble</dd>
+            <dt>Imbalance</dt><dd>Class weights and <code>scale_pos_weight</code></dd>
+          </dl>
+          <ul class="tags"><li>XGBoost</li><li>LightGBM</li><li>Keras</li><li>SHAP</li><li>Streamlit</li></ul>
+          <div class="links"><a href="https://github.com/jedhubert/Bank-Term-Deposit-Subscription-Prediction" target="_blank" rel="noopener">Source</a></div>
+        </article>
+
+        <article class="card" data-cat="ml">
+          <div class="card-top"><span class="kind">Analytics</span><span class="repo">Netflix-Content-Strategy-Analysis</span></div>
+          <h3>Netflix Content Strategy Analysis</h3>
+          <p>An exploratory study of Netflix's 2023 engagement report: what drives hours viewed by content type, language, release month, season and weekday, and whether releases cluster around major holidays.</p>
+          <dl class="spec">
+            <dt>Dataset</dt><dd><strong>24,812</strong> titles (14,104 movies, 10,708 shows)</dd>
+            <dt>Method</dt><dd>pandas aggregation, Plotly charts</dd>
+          </dl>
+          <ul class="tags"><li>pandas</li><li>Plotly</li><li>Jupyter</li></ul>
+          <div class="links"><a href="https://github.com/jedhubert/Netflix-Content-Strategy-Analysis" target="_blank" rel="noopener">Source</a></div>
+        </article>
+
+        <article class="card" data-cat="ml">
+          <div class="card-top"><span class="kind">Data engineering</span><span class="repo">Scraping-Market-Data-for-ML-Pipelines</span></div>
+          <h3>Market Data Scraper for ML</h3>
+          <p>Scrapes the most-active stocks list into a clean, timestamped CSV ready for downstream ML: price, change, volume, 3-month average volume, market cap, P/E and 52-week range for each ticker.</p>
+          <dl class="spec">
+            <dt>Snapshot</dt><dd><strong>24</strong> tickers, 6 May 2026</dd>
+            <dt>Output</dt><dd><code>market_data_&lt;timestamp&gt;.csv</code></dd>
+          </dl>
+          <ul class="tags"><li>Python</li><li>Web scraping</li><li>pandas</li></ul>
+          <div class="links"><a href="https://github.com/jedhubert/Scraping-Market-Data-for-ML-Pipelines" target="_blank" rel="noopener">Source</a></div>
+        </article>
+
+        <article class="card" data-cat="web">
+          <div class="card-top"><span class="kind">Healthcare · Web</span><span class="repo">BloodBridge</span></div>
+          <h3>BloodBridge</h3>
+          <p>Connects people who need blood with donors who match. Users register with their blood type, post requests with location and urgency, and donors respond from a dashboard. Built on Flask with a pooled MySQL connection and deployed on AWS EC2.</p>
+          <dl class="spec">
+            <dt>Flow</dt><dd>Register → request → respond → donate</dd>
+            <dt>Demo</dt><dd>Video walkthrough in the repo</dd>
+          </dl>
+          <ul class="tags"><li>Flask</li><li>MySQL</li><li>AWS EC2</li><li>Jinja</li></ul>
+          <div class="links"><a href="https://github.com/jedhubert/BloodBridge" target="_blank" rel="noopener">Source</a><a href="https://github.com/jedhubert/BloodBridge/blob/main/Bloodbridge.mp4" target="_blank" rel="noopener">Demo video</a></div>
+        </article>
+
+        <article class="card" data-cat="web">
+          <div class="card-top"><span class="kind">Full stack</span><span class="repo">cloud-contacts-easy</span></div>
+          <h3>Contact Keeper</h3>
+          <p>A cloud phone directory: list, add, edit, delete and search contacts by name or phone. A typed React front end on TanStack Start, with a Supabase Postgres table defined and migrated through Drizzle.</p>
+          <dl class="spec">
+            <dt>Status</dt><dd><strong>Live</strong> on Lovable</dd>
+            <dt>Schema</dt><dd>name, phone, email, address, created_at</dd>
+          </dl>
+          <ul class="tags"><li>React</li><li>TypeScript</li><li>TanStack</li><li>Supabase</li><li>Drizzle</li></ul>
+          <div class="links"><a href="https://cloud-contacts-easy.lovable.app" target="_blank" rel="noopener">Live app</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h2>Let's build something.</h2>
+      <p>Find all my work and get in touch on GitHub.</p>
+    </div>
+    <a class="btn primary" href="https://github.com/jedhubert" target="_blank" rel="noopener">github.com/jedhubert</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.filters button');
+  var cards = document.querySelectorAll('.card');
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.dataset.f;
+      buttons.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      cards.forEach(function (c) { c.hidden = f !== 'all' && c.dataset.cat !== f; });
+    });
+  });
+})();
+</script>
+</body>
+</html>
