@@ -146,6 +146,8 @@ footer { border-top: 1px solid var(--line); }
 footer .wrap { padding-block: 40px 56px; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: end; }
 footer h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 footer p { margin: 8px 0 0; color: var(--muted); }
+footer .roles { margin: 8px 0 0; padding-left: 1.4em; display: grid; gap: 2px; font-weight: 500; }
+footer .roles li::marker { color: var(--accent); font-family: var(--mono); }
 footer .addr { font-family: var(--mono); color: var(--ink); user-select: all; }
 
 @media (max-width: 860px) {
@@ -339,7 +341,14 @@ footer .addr { font-family: var(--mono); color: var(--ink); user-select: all; }
   <div class="wrap">
     <div>
       <h2>Let's build something.</h2>
-      <p>Open to data science, ML, AI and backend roles. Email me at <span class="addr">je11hubert@gmail.com</span>.</p>
+      <p>Open to these roles:</p>
+      <ol class="roles">
+        <li>Data Scientist</li>
+        <li>Machine Learning Engineer</li>
+        <li>AI Engineer</li>
+        <li>Backend Developer</li>
+      </ol>
+      <p>Email me at <span class="addr">je11hubert@gmail.com</span>.</p>
     </div>
     <div class="cta">
       <a class="btn primary" href="mailto:je11hubert@gmail.com">Email me</a>
